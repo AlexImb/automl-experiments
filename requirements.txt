@@ -1,5 +1,6 @@
+kafka-python
 requests
 tabulate
 colorama>=0.3.8
 future
-http://h2o-release.s3.amazonaws.com/h2o/rel-yu/1/Python/h2o-3.28.0.1-py2.py3-none-any.whl
+h2o
