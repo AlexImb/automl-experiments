@@ -17,3 +17,7 @@ train-tf-kafka:
 # Auto-sklearn
 train-auto-sklearn: 
 	python training/auto-sklearn-train.py
+
+# TPOT
+train-tpot: 
+	python training/tpot-train.py

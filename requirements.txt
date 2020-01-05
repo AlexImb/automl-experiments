@@ -8,3 +8,4 @@ pandas
 tensorflow
 tensorflow_io
 auto-sklearn
+tpot
