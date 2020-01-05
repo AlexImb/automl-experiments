@@ -1,5 +1,6 @@
 import h2o
-import csv
+import pandas as pd
+from io import StringIO
 from kafka import KafkaConsumer, KafkaProducer
 
 INPUT_TOPIC = 'airlines_prediction_input'
@@ -24,9 +25,7 @@ consumer = KafkaConsumer(INPUT_TOPIC, value_deserializer=lambda x: x.decode('utf
 for msg in consumer:
     try:
         print('Message:', msg.value)
-        parsed_csv = csv.reader([msg.value])
-        parsed_csv = list(parsed_csv)
-        print('Parsed', parsed_csv)
+        parsed_csv = pd.read_csv(StringIO(msg.value), header= None)
         input_df = h2o.H2OFrame(parsed_csv)
         input_df.names = column_names
         print(input_df)

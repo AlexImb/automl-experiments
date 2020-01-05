@@ -4,3 +4,4 @@ tabulate
 colorama>=0.3.8
 future
 h2o
+pandas
