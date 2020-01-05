@@ -5,3 +5,6 @@ colorama>=0.3.8
 future
 h2o
 pandas
+tensorflow
+tensorflow_io
+scikit-learn
