@@ -13,3 +13,7 @@ predict-h2o-stream:
 # Tensorflow IO
 train-tf-kafka: 
 	python training/tfio-kafka-train.py
+
+# Auto-sklearn
+train-auto-sklearn: 
+	python training/auto-sklearn-train.py

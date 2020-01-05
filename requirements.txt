@@ -7,4 +7,4 @@ h2o
 pandas
 tensorflow
 tensorflow_io
-scikit-learn
+auto-sklearn
