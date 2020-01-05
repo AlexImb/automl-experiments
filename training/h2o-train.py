@@ -13,12 +13,12 @@ data_path = "https://s3.amazonaws.com/h2o-airlines-unpacked/allyears_10.csv"
 # Airlines all years 1987-2008 12GB
 data_path = "https://s3.amazonaws.com/h2o-airlines-unpacked/allyears.csv"
 # 2000 Row 4.5 MB
-# data_path = "https://s3.amazonaws.com/h2o-airlines-unpacked/allyears2k.csv"
-df = h2o.import_file(data_path)
+data_path = "https://s3.amazonaws.com/h2o-airlines-unpacked/allyears2k.csv"
+# df = h2o.import_file(data_path)
 
 # # Or use local version
-# df = h2o.upload_file("./datasets/allyears2k.csv")
-# column_names = df.names
+df = h2o.upload_file("./datasets/allyears2k.csv")
+column_names = df.names
 
 # # Or ingest from Kafka topic
 # DATA_TOPIC = 'airlines_stream'
