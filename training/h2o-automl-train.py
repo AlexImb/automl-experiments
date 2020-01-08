@@ -53,7 +53,6 @@ column_names = df.names
 
 print(f'Size of training set: {df.shape[0]} rows and {df.shape[1]} columns')
 
-df["Year"]= df["Year"].asfactor()
 df["Month"]= df["Month"].asfactor()
 df["DayOfWeek"] = df["DayOfWeek"].asfactor()
 df["Cancelled"] = df["Cancelled"].asfactor()
@@ -64,7 +63,7 @@ train = splits[0]
 test = splits[1]
 
 y = "IsDepDelayed" 
-x = ["Origin", "Dest", "Year", "UniqueCarrier", "DayOfWeek", "Month", "Distance", "FlightNum"]
+x = ["Origin", "Dest", "UniqueCarrier", "DayOfWeek", "Month", "Distance", "FlightNum"]
 
 aml = H2OAutoML(max_runtime_secs=120, seed=1)
 aml.train(x=x, y=y, training_frame=train, leaderboard_frame=test)

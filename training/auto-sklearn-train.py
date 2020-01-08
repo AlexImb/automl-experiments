@@ -8,7 +8,6 @@ import numpy as np
 
 df = pd.read_csv("./datasets/allyears2k.csv", low_memory=False)
 
-df["Year"]= df["Year"].astype('category')
 df["Month"]= df["Month"].astype('category')
 df["DayOfWeek"] = df["DayOfWeek"].astype('category')
 df["Cancelled"] = df["Cancelled"].astype('category')
@@ -19,7 +18,7 @@ df['IsDepDelayed'] = df['Dest'].astype('category')
 
 print(df.dtypes)
 
-predictors = ["Origin", "Dest", "Year", "UniqueCarrier", "DayOfWeek", "Month", "Distance", "FlightNum"]
+predictors = ["Origin", "Dest", "UniqueCarrier", "DayOfWeek", "Month", "Distance", "FlightNum"]
 target = 'IsDepDelayed'
 
 y = df.pop(target)
