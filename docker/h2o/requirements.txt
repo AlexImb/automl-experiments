@@ -1,0 +1,7 @@
+# Experiment main library
+h2o
+# OpenML API communication
+openml
+python-dotenv
+# Consuming and producing to/from Kafka topics
+kafka-python

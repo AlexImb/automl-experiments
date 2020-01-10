@@ -1,5 +1,28 @@
 version: '2'
 services:
+  auto-sklearn:
+    build: ./docker/auto-sklearn
+    image: auto-sklearn:latest
+    volumes:
+      - ./:/home/jovyan/work
+    working_dir: /home/jovyan/work
+    ports:
+      - 8888:8888
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
+
+  h2o:
+    build: ./docker/h2o
+    image: h2o:latest
+    volumes:
+      - ./:/home/jovyan/work
+    working_dir: /home/jovyan/work
+    ports:
+      - 8889:8888
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
+  
+  # Kafka Cluster
   zookeeper:
     image: confluentinc/cp-zookeeper:5.3.1
     ports:

@@ -38,11 +38,11 @@ for msg in consumer:
     if i >= n: break
     else:
         # print('Message', i, ': ', msg.value)
-        # if i % 100:
-            # print('#', i)
-    
+        if i % 100 == 0:
+            print('#', i)
+
         if i > 0:
-            message_df = pd.read_csv(StringIO(msg.value), header = None)
+            message_df = pd.read_csv(StringIO(msg.value), header=None)
             pandas_dfs.append(message_df)
         i += 1
 
@@ -53,12 +53,12 @@ df.names = column_names
 
 print(f'Size of training set: {df.shape[0]} rows and {df.shape[1]} columns')
 
-df["Month"]= df["Month"].asfactor()
+df["Month"] = df["Month"].asfactor()
 df["DayOfWeek"] = df["DayOfWeek"].asfactor()
 df["Cancelled"] = df["Cancelled"].asfactor()
 df['FlightNum'] = df['FlightNum'].asfactor()
 
-splits= df.split_frame(ratios = [.8], seed = 1)
+splits = df.split_frame(ratios=[.8], seed=1)
 train = splits[0]
 test = splits[1]
 
@@ -66,13 +66,13 @@ y = "IsDepDelayed"
 x = ["Origin", "Dest", "UniqueCarrier", "DayOfWeek", "Month", "Distance", "FlightNum"]
 
 # split into train and validation sets
-train, valid = df.split_frame(ratios = [.8], seed = 1)
+train, valid = df.split_frame(ratios=[.8], seed=1)
 
 # initialize the estimator
-airlines_gbm = H2OGradientBoostingEstimator(seed =1)
+airlines_gbm = H2OGradientBoostingEstimator(seed=1)
 
 # then train the model
-airlines_gbm.train(x = x, y = y, training_frame = train, validation_frame = valid)
+airlines_gbm.train(x=x, y=y, training_frame=train, validation_frame=valid)
 
 # print the auc for the validation set
 print(airlines_gbm.model_performance(valid=True))
