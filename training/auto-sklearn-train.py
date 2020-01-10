@@ -1,33 +1,36 @@
-import autosklearn.classification
+import os
+import openml
 import sklearn.model_selection
 import sklearn.datasets
 import sklearn.metrics
+import autosklearn.classification
 
-import pandas as pd
-import numpy as np
+from dotenv import load_dotenv
+load_dotenv()
 
-df = pd.read_csv("./datasets/allyears2k.csv", low_memory=False)
+openml.config.apikey = os.getenv('OPENML_API_KEY')
+print(openml.config.apikey)
 
-df["Month"]= df["Month"].astype('category')
-df["DayOfWeek"] = df["DayOfWeek"].astype('category')
-df["Cancelled"] = df["Cancelled"].astype('category')
-df['FlightNum'] = df['FlightNum'].astype('category')
-df['Origin'] = df['Origin'].astype('category')
-df['Dest'] = df['Dest'].astype('category')
-df['IsDepDelayed'] = df['Dest'].astype('category')
+task = openml.tasks.get_task(189354)
+train_indices, test_indices = task.get_train_test_split_indices()
+X, y = task.get_X_and_y()
 
-print(df.dtypes)
+X_train = X[train_indices]
+y_train = y[train_indices]
+X_test = X[test_indices]
+y_test = y[test_indices]
 
-predictors = ["Origin", "Dest", "UniqueCarrier", "DayOfWeek", "Month", "Distance", "FlightNum"]
-target = 'IsDepDelayed'
+dataset = task.get_dataset()
+_, _, categorical_indicator, _ = dataset.get_data(target=task.target_name)
 
-y = df.pop(target)
-X = df[predictors]
+# Create feature type list from openml.org indicator and run autosklearn
+feat_type = ['Categorical' if ci else 'Numerical' for ci in categorical_indicator]
 
-X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, random_state=1)
-automl = autosklearn.classification.AutoSklearnClassifier()
+cls = autosklearn.classification.AutoSklearnClassifier(
+    time_left_for_this_task=120,
+    per_run_time_limit=30,
+)
+cls.fit(X_train, y_train, feat_type=feat_type)
 
-automl.fit(X_train, y_train)
-
-y_hat = automl.predict(X_test)
-print("Score", sklearn.metrics.accuracy_score(y_test, y_hat))
+predictions = cls.predict(X_test)
+print("Accuracy score", sklearn.metrics.accuracy_score(y_test, predictions))

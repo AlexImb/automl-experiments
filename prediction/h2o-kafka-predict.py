@@ -14,7 +14,7 @@ model_path = 'models/airlines_h2o_bin/StackedEnsemble_AllModels_AutoML_20200104_
 model = h2o.load_model(model_path)
 
 # Read column names from sample data
-df = h2o.upload_file("./datasets/allyears2k.csv")
+df = h2o.upload_file("./datasets/airlines-allyears2k.csv")
 column_names = df.names
 
 # Create a producer to send the pridction output

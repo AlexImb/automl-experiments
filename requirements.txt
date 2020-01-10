@@ -1,11 +1,21 @@
+# OpenML API communication
+openml
+python-dotenv
+# Consuming and producing to/from Kafka topics
 kafka-python
+# DataFrames manipulation
+pandas
+# Required by H2O.ai
 requests
 tabulate
 colorama>=0.3.8
 future
 h2o
-pandas
+# Tensorflow
 tensorflow
 tensorflow_io
+# scikit-learn + auto-sklearn
+scikit-learn
 auto-sklearn
+# TPOT
 tpot

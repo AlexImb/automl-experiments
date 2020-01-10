@@ -1,7 +1,7 @@
 # H2O.ai + Kafka
 
 ```
-cat ./datasets/allyears2k.csv | kafkacat -P -b localhost -t airlines_stream
+cat ./datasets/airlines-allyears2k.csv | kafkacat -P -b localhost -t airlines_stream
 ```
 
 ```
