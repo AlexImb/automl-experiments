@@ -6,9 +6,13 @@ up:
 down:
 	docker-compose down
 
+# Scikit-learn
+train-sklearn-batch: 
+	docker-compose exec auto-sklearn python training/sklearn-batch.py
+	
 # Auto-sklearn
 train-auto-sklearn: 
-	python training/auto-sklearn-train.py
+	docker-compose exec auto-sklearn python training/auto-sklearn-train.py
 
 # Spark Streaming
 train-spark: 
