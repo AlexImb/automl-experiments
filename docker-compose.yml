@@ -10,6 +10,17 @@ services:
       - 8888:8888
     environment: 
       - JUPYTER_ENABLE_LAB=yes
+  
+  scikit-multiflow:
+    build: ./docker/scikit-multiflow
+    image: scikit-multiflow:latest
+    volumes:
+      - ./:/home/jovyan/work
+    working_dir: /home/jovyan/work
+    ports:
+      - 8889:8888
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
 
   h2o:
     build: ./docker/h2o
@@ -18,7 +29,7 @@ services:
       - ./:/home/jovyan/work
     working_dir: /home/jovyan/work
     ports:
-      - 8889:8888
+      - 8890:8888
     environment: 
       - JUPYTER_ENABLE_LAB=yes
   
@@ -29,10 +40,10 @@ services:
       - ./:/home/jovyan/work
     working_dir: /home/jovyan/work
     ports:
-      - 8890:8888
+      - 8891:8888
     environment: 
       - JUPYTER_ENABLE_LAB=yes
-  
+
   # Kafka Cluster
   zookeeper:
     image: confluentinc/cp-zookeeper:5.3.1

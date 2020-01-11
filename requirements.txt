@@ -18,6 +18,8 @@ tensorflow_io
 # scikit-learn + auto-sklearn
 scikit-learn
 auto-sklearn
+# scikit-multiflow
+scikit-multiflow
 # TPOT
 tpot
 # Pyspark

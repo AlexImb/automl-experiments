@@ -6,11 +6,23 @@ up:
 down:
 	docker-compose down
 
+
+# Publish OpenML Dataset to Kafka
+publish-dataset: 
+	docker-compose exec scikit-multiflow python producers/openml-kafka.py
+
+
 # Scikit-learn
 train-sklearn-batch: 
 	docker-compose exec auto-sklearn python training/sklearn-batch.py
 train-sklearn-online: 
 	docker-compose exec auto-sklearn python training/sklearn-online.py
+
+
+# Scikit-multiflow
+train-scikit-multiflow:
+	docker-compose exec scikit-multiflow python training/scikit-multiflow.py
+
 
 # Auto-sklearn
 train-auto-sklearn: 
