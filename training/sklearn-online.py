@@ -1,57 +1,43 @@
-import os
-import openml
-import sklearn.model_selection
-import sklearn.datasets
-import sklearn.metrics
-import autosklearn.classification
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
 
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import SGDClassifier, Perceptron
+from sklearn.linear_model import PassiveAggressiveClassifier
 
-from dotenv import load_dotenv
-load_dotenv()
+heldout = [0.95, 0.90, 0.75, 0.50, 0.01]
+rounds = 20
+X, y = datasets.load_digits(return_X_y=True)
 
-openml.config.apikey = os.getenv('OPENML_API_KEY')
+classifiers = [
+    ('SGD', SGDClassifier(max_iter=100)),
+    ('ASGD', SGDClassifier(average=True)),
+    ('Perceptron', Perceptron()),
+    ('Passive-Aggressive I', PassiveAggressiveClassifier(loss='hinge',
+                                                         C=1.0, tol=1e-4)),
+    ('Passive-Aggressive II', PassiveAggressiveClassifier(loss='squared_hinge',
+                                                          C=1.0, tol=1e-4)),
+]
 
-task = openml.tasks.get_task(7592)
-train_indices, test_indices = task.get_train_test_split_indices()
-X, y = task.get_X_and_y()
+xx = 1. - np.array(heldout)
 
-dataset = task.get_dataset()
-_, _, categorical_mask, _ = dataset.get_data(target=task.target_name)
+for name, clf in classifiers:
+    print('training %s' % name)
+    rng = np.random.RandomState(42)
+    yy = []
+    for i in heldout:
+        yy_ = []
+        for r in range(rounds):
+            X_train, X_test, y_train, y_test = \
+                train_test_split(X, y, test_size=i, random_state=rng)
+            clf.partial_fit(X_train, y_train, classes=np.unique(y))
+            y_pred = clf.predict(X_test)
+            yy_.append(1 - np.mean(y_pred == y_test))
+        yy.append(np.mean(yy_))
+    plt.plot(xx, yy, label=name)
 
-numeric_mask = [not x for x in categorical_mask]
-print(categorical_mask)
-print(numeric_mask)
-
-numeric_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='median'))
-])
-
-categorical_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='constant')),
-    ('onehot', OneHotEncoder(handle_unknown='ignore'))
-])
-
-column_transformer = ColumnTransformer(transformers=[
-        ('num', numeric_transformer, numeric_mask),
-        ('cat', categorical_transformer, categorical_mask)
-])
-
-X = column_transformer.fit_transform(X)
-
-X_train = X[train_indices]
-y_train = y[train_indices]
-X_test = X[test_indices]
-y_test = y[test_indices]
-
-cls = autosklearn.classification.AutoSklearnClassifier(
-    time_left_for_this_task=120,
-    per_run_time_limit=30,
-)
-cls.fit(X_train, y_train)
-
-predictions = cls.predict(X_test)
-print("Accuracy score", sklearn.metrics.accuracy_score(y_test, predictions))
+plt.legend(loc='upper right')
+plt.xlabel('Proportion train')
+plt.ylabel('Test Error Rate')
+plt.savefig('./figures/sklearn-online.png')

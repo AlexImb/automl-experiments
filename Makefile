@@ -9,7 +9,9 @@ down:
 # Scikit-learn
 train-sklearn-batch: 
 	docker-compose exec auto-sklearn python training/sklearn-batch.py
-	
+train-sklearn-online: 
+	docker-compose exec auto-sklearn python training/sklearn-online.py
+
 # Auto-sklearn
 train-auto-sklearn: 
 	docker-compose exec auto-sklearn python training/auto-sklearn-train.py
