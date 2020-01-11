@@ -22,6 +22,17 @@ services:
     environment: 
       - JUPYTER_ENABLE_LAB=yes
   
+  spark:
+    build: ./docker/spark
+    image: spark:latest
+    volumes:
+      - ./:/home/jovyan/work
+    working_dir: /home/jovyan/work
+    ports:
+      - 8890:8888
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
+  
   # Kafka Cluster
   zookeeper:
     image: confluentinc/cp-zookeeper:5.3.1
