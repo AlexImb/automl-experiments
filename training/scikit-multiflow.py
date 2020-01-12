@@ -7,7 +7,7 @@ stream.prepare_for_use()
 
 ht = HoeffdingTree()
 
-evaluator = EvaluatePrequential(show_plot=True,
+evaluator = EvaluatePrequential(show_plot=False,
                                 pretrain_size=20,
                                 max_samples=500)
 

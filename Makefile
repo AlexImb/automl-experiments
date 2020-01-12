@@ -8,7 +8,7 @@ down:
 
 
 # Publish OpenML Dataset to Kafka
-publish-dataset: 
+publish-openml-dataset: 
 	docker-compose exec scikit-multiflow python producers/openml-kafka.py
 
 
@@ -26,7 +26,6 @@ train-scikit-multiflow-kafka:
 	docker-compose exec scikit-multiflow python training/scikit-multiflow-kafka.py
 train-scikit-multiflow-speed:
 	docker-compose exec scikit-multiflow python training/scikit-multiflow-speed.py
-
 
 
 # Auto-sklearn
