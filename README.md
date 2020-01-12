@@ -1,20 +1,16 @@
 # AutoML Experiments
 
-A collection of AutoML experiments than can be executed in Docker and using Kafka as data source
+A collection of AutoML experiments than can be executed in Docker and can use Kafka as streaming data source.
 
 ## Running instructions
 
 ### Requirements
 
-Required:
-- Docker
+Required: `Docker`
 
-Strongly recommended:
-- Docker Compose
-- Make
+Strongly recommended: `Docker Compose, Make`
 
-Usefull:
-- kafkacat
+Useful: kafkacat
 
 
 ### Starting the containers
@@ -81,7 +77,7 @@ Copy the token and use it to login in Jupyter.
 ## Development instructions
 
 For developing the experiments it is useful to have the dependencies installed locally
-in a `virtualenv`. It helps IDEs and linters to provide usefull information.
+in a `virtualenv`. It helps IDEs to provide autocompletion information.
 
 - Create and activate a `virtualenv`
 - Install some or all dependencies from `dev-requirements.txt`
