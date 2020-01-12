@@ -1,5 +1,16 @@
 version: '2'
 services:
+  automl-streams:
+    build: ./docker/automl-streams
+    image: automl-streams:latest
+    volumes:
+      - ./:/home/jovyan/work
+    working_dir: /home/jovyan/work
+    ports:
+      - 8887:8888
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
+
   auto-sklearn:
     build: ./docker/auto-sklearn
     image: auto-sklearn:latest
@@ -10,7 +21,7 @@ services:
       - 8888:8888
     environment: 
       - JUPYTER_ENABLE_LAB=yes
-  
+    
   scikit-multiflow:
     build: ./docker/scikit-multiflow
     image: scikit-multiflow:latest

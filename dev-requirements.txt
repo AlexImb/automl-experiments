@@ -24,3 +24,5 @@ scikit-multiflow
 tpot
 # Pyspark
 pyspark
+# automl-streams
+automl-streams
