@@ -1,0 +1,21 @@
+# TEST CONFIGURATION BEGIN
+# KafkaStream(topic='elec_4', target_idx=-1, n_targets=1, cat_features=None)
+# [HT] HoeffdingTree(binary_split=False, grace_period=200, leaf_prediction='nba', max_byte_size=33554432, memory_estimate_period=1000000, nb_threshold=0, no_preprune=False, nominal_attributes=None, remove_poor_atts=False, split_confidence=1e-07, split_criterion='info_gain', stop_mem_management=False, tie_threshold=0.05)
+# EvaluatePrequential(batch_size=1, data_points_for_classification=False, max_samples=3000, max_time=inf, metrics=['accuracy', 'kappa'], n_wait=200, output_file='multiflow.hoeff.csv', pretrain_size=200, restart_stream=True, show_plot=True)
+# TEST CONFIGURATION END
+id,mean_acc_[HT],current_acc_[HT],mean_kappa_[HT],current_kappa_[HT]
+200,1.000000,1.000000,1.000000,1.000000
+399,0.860000,0.860000,0.712762,0.712762
+599,0.850000,0.840000,0.692647,0.672634
+799,0.866667,0.900000,0.732585,0.795731
+999,0.871250,0.885000,0.742394,0.768705
+1199,0.876000,0.895000,0.746753,0.648123
+1399,0.891667,0.970000,0.773992,0.920000
+1599,0.901429,0.960000,0.790503,0.896266
+1799,0.882500,0.750000,0.757189,0.502438
+1999,0.868889,0.760000,0.728144,0.485806
+2199,0.855000,0.730000,0.696349,0.353680
+2399,0.832727,0.610000,0.649622,0.293734
+2599,0.828333,0.780000,0.641355,0.551935
+2799,0.824615,0.780000,0.636204,0.560527
+2999,0.828571,0.880000,0.641668,0.700897

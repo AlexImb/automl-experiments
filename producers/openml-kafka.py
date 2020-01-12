@@ -21,6 +21,7 @@ OPENML_DATASET = 23512
 TOPIC = f'openml_test_4_{OPENML_DATASET}'
 MAX_SAMPLES = 10000
 
+print(f'Feching OpenML dataset ID: {OPENML_DATASET}')
 dataset = openml.datasets.get_dataset(OPENML_DATASET)
 data, categorical, attributes = dataset._load_data()
 
@@ -32,7 +33,7 @@ producer = KafkaProducer(bootstrap_servers='broker:29092')
 for i in data.index:
     producer.send(TOPIC, data.iloc[[i]].to_csv(header=False).encode('utf-8'))
     producer.flush()
-    if i > MAX_SAMPLES:
+    if i >= MAX_SAMPLES - 1:
         break
 
 elapsed_time = time.time() - start_time

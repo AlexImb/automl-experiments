@@ -21,7 +21,7 @@ column_names = df.names
 producer = KafkaProducer()
 
 # Cosume Kakfa messages from the input topic
-consumer = KafkaConsumer(INPUT_TOPIC, value_deserializer=lambda x: x.decode('utf-8'))
+consumer = KafkaConsumer(INPUT_TOPIC, bootstrap_servers='broker:29092', value_deserializer=lambda x: x.decode('utf-8'))
 for msg in consumer:
     try:
         print('Message:', msg.value)

@@ -22,6 +22,11 @@ train-sklearn-online:
 # Scikit-multiflow
 train-scikit-multiflow:
 	docker-compose exec scikit-multiflow python training/scikit-multiflow.py
+train-scikit-multiflow-kafka:
+	docker-compose exec scikit-multiflow python training/scikit-multiflow-kafka.py
+train-scikit-multiflow-speed:
+	docker-compose exec scikit-multiflow python training/scikit-multiflow-speed.py
+
 
 
 # Auto-sklearn
