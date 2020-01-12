@@ -10,12 +10,11 @@ Required: `Docker`
 
 Strongly recommended: `Docker Compose, Make`
 
-Useful: kafkacat
-
+Useful: `kafkacat`
 
 ### Starting the containers
 
-All containers at once
+All containers at once:
 ```bash
 make up
 ```
@@ -43,13 +42,13 @@ cat ./datasets/covtype.csv | kafkacat -P -b localhost -t covtype
 
 
 ```bash
-make train-sklearn-batch
+make train-scikit-multiflow-kafka
 ```
 
 Or directly using Docker Compose
 
 ```bash
-docker-compose exec auto-sklearn python training/sklearn-batch.py
+docker-compose exec auto-sklearn python training/scikit-multiflow-kafka.py
 ```
 
 Alternatively, you can run a single container using only Docker run.
@@ -73,6 +72,13 @@ docker-compose logs auto-sklearn
 ```
 
 Copy the token and use it to login in Jupyter.
+
+### Stopping the containers
+
+All containers at once:
+```bash
+make down
+```
 
 ## Development instructions
 

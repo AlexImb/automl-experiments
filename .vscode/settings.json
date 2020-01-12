@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/aleximbrea/AutoML/automl-experiment-3/venv/bin/python3.7",
+    "python.pythonPath": "venv/bin/python",
     "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": false,
     "python.linting.enabled": true
